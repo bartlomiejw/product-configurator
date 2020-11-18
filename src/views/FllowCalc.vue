@@ -1,12 +1,18 @@
 <template>
   <div class="fllow-calc">
-    <div class="container-fluid d-flex flex-column justify-content-center align-items-center h-100">
+    <div
+      class="container-fluid d-flex flex-column justify-content-center align-items-center h-100"
+    >
       <div class="row w-100">
         <div class="col-xl-12 p-0">
           <router-link to="/">Wróć na strone główną</router-link>
           <div class="fllow-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
-              <img alt="Fllow.pl logo" class="img-fluid" src="../assets/fllow.png" />
+              <img
+                alt="Fllow.pl logo"
+                class="img-fluid"
+                src="../assets/img/fllow.png"
+              />
             </router-link>
           </div>
           <Calculator msg="Fllow.pl Calculator" class="my-5" />
@@ -24,22 +30,24 @@
               <div class="input-group w-auto">
                 <div class="input-group-radio">
                   <input
-                    id="calculatorPlaszczyznaPion"
-                    checked
-                    type="radio"
-                    name="calculatorPlaszczyzna"
-                    aria-label="Pionowy sposób układania paneli"
-                  />
-                  <label for="calculatorPlaszczyznaPion">Pion</label>
-                </div>
-                <div class="input-group-radio">
-                  <input
                     id="calculatorPlaszczyznaPoziom"
+                    checked
+                    v-on:click="isRotate = false"
                     type="radio"
                     name="calculatorPlaszczyzna"
                     aria-label="Poziomy sposób układania paneli"
                   />
                   <label for="calculatorPlaszczyznaPoziom">Poziom</label>
+                </div>
+                <div class="input-group-radio">
+                  <input
+                    id="calculatorPlaszczyznaPion"
+                    v-on:click="isRotate = true"
+                    type="radio"
+                    name="calculatorPlaszczyzna"
+                    aria-label="Pionowy sposób układania paneli"
+                  />
+                  <label for="calculatorPlaszczyznaPion">Pion</label>
                 </div>
               </div>
             </div>
@@ -55,12 +63,17 @@
                 <select
                   class="custom-select"
                   id="calculatorPanelProducent"
+                  v-model="formResults.calculatorPanelProducent"
                   aria-label="Wybierz producenta"
                 >
-                  <option selected>Wybierz...</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option disabled value="">Wybierz...</option>
+                  <option
+                    v-for="panel in panels"
+                    :key="panel.id"
+                    :value="panel.producent"
+                  >
+                    {{ panel.producent }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -75,12 +88,17 @@
                 <select
                   class="custom-select"
                   id="calculatorPanelName"
+                  v-model="formResults.calculatorPanelName"
                   aria-label="Wybierz nazwę panela"
                 >
-                  <option selected>Wybierz...</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option disabled value="">Wybierz...</option>
+                  <option
+                    v-for="name in formResults.name"
+                    :key="name"
+                    :value="name"
+                  >
+                    {{ name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -95,12 +113,17 @@
                 <select
                   class="custom-select"
                   id="calculatorPanelNumber"
+                  v-model="formResults.calculatorPanelNumber"
                   aria-label="Wybierz numer panela"
                 >
-                  <option selected>Wybierz...</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option disabled value="">Wybierz...</option>
+                  <option
+                    v-for="panel in panels"
+                    :key="panel.id"
+                    :value="panel.number"
+                  >
+                    {{ panel.number }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -165,7 +188,7 @@
                   <span>Wysokość </span>
                 </div>
                 <div class="calculator__result-field">
-                  <p> 2120 cm</p>
+                  <p>2120 cm</p>
                 </div>
               </div>
               <div class="row justify-content-end">
@@ -173,22 +196,31 @@
                   <span>Szerokość </span>
                 </div>
                 <div class="calculator__result-field">
-                   <p>2120 cm</p>
+                  <p>2120 cm</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-xl-3 calculator__result">
-          <p class="calculator__result-title">Sweter Sava</p>
-          <img alt="Fllow.pl logo" class="img-fluid mb-3" src="../assets/panel.png" />
-          <p class="mb-3">Model: PANEL TAPICER</p>
+          <p class="calculator__result-title">Wynik</p>
+          <img
+            alt="Sweter Sava"
+            class="img-fluid my-5"
+            v-bind:class="{ calculator__landscape: isRotate }"
+            src="../assets/img/panel.png"
+          />
+          <p class="mb-3">Model: {{ fullName }}</p>
           <p class="mb-3">Rozmiar: 30x60</p>
           <div class="calculator__result-price">
             <span>Cena:</span>
-            <div>23 776 zł </div>
+            <div>23 776 zł</div>
             <div>
-              <img src="../assets/basket.png" class="img-fluid" alt="Ikona ceny">
+              <img
+                src="../assets/img/basket.png"
+                class="img-fluid"
+                alt="Ikona ceny"
+              />
             </div>
           </div>
         </div>
@@ -206,21 +238,62 @@ export default {
   components: {
     Calculator,
   },
+  data() {
+    return {
+      isRotate: false,
+      panels: [
+        {
+          id: '1',
+          producent: 'Sava',
+          number: '109SSVA92',
+          name: 'Sweter',
+          price: '10',
+          img: '../assets/img/panel.png',
+          size: '30x60',
+        },
+        {
+          id: '2',
+          producent: 'Osava',
+          number: '222SSVA92',
+          name: 'Make',
+          price: '15',
+          img: '../assets/img/panel.png',
+          size: '30x60',
+        },
+      ],
+      formResults: {
+        calculatorPanelProducent: '',
+        calculatorPanelName: '',
+        calculatorPanelNumber: '',
+      },
+    };
+  },
+  computed: {
+    fullName() {
+      return Object.values(this.formResults).join(' ');
+    },
+    findProduct() {
+      if (this.panels.producent === this.formResults.calculatorPanelProducent) {
+        return Object.values(this.panels);
+      }
+      return this.panels.name;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;900&display=swap');
 * {
-    font-family: 'Encode Sans', sans-serif !important;
+  font-family: 'Encode Sans', sans-serif !important;
 }
 .fllow-calc {
   height: 100%;
-  .calculator {
-    padding-top: 2em;
-    padding-bottom: 2em;
 
+  .calculator {
     .calculator__operation {
+      padding: 2em;
       background-color: #fafafa;
+      border-right: 0.5em solid #fff;
 
       .calculator__before-txt {
         color: #dfbad2;
@@ -275,7 +348,7 @@ export default {
         position: relative;
         margin: 10px 0 0;
 
-        input[type="radio"] {
+        input[type='radio'] {
           margin-right: 0.75rem;
           margin-bottom: 0;
           display: none;
@@ -286,7 +359,7 @@ export default {
           font-size: 1em;
 
           &::before {
-            content: " ";
+            content: '';
             display: inline-block;
             position: relative;
             top: 5px;
@@ -299,14 +372,14 @@ export default {
           }
         }
 
-        input[type="radio"]:checked + label::after {
+        input[type='radio']:checked + label::after {
           border-radius: 11px;
           width: 12px;
           height: 12px;
           position: absolute;
           top: 15px;
           left: 16.2px;
-          content: " ";
+          content: ' ';
           display: block;
           background: #dfbad2;
         }
@@ -340,11 +413,22 @@ export default {
     }
     .calculator__result {
       background-color: #fafafa;
+      padding: 2em;
+      border-left: 0.5em solid #fff;
 
       &-title {
         font-weight: 800;
         font-size: 18px;
         line-height: 22px;
+      }
+
+      .calculator__portrait {
+        filter: drop-shadow(7px 7px 21px rgba(0, 0, 0, 0.23));
+      }
+
+      .calculator__landscape {
+        transform: rotate(-90deg);
+        padding: 20% 0;
       }
 
       .calculator__result-price {

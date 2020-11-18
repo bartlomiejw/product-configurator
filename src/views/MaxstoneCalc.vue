@@ -1,12 +1,18 @@
 <template>
   <div class="maxstone-calc">
-    <div class="container-fluid d-flex flex-column justify-content-center align-items-center h-100">
+    <div
+      class="container-fluid d-flex flex-column justify-content-center align-items-center h-100"
+    >
       <div class="row w-100">
         <div class="col-xl-12 p-0">
           <router-link to="/">Wróć na strone główną</router-link>
           <div class="maxstone-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
-              <img alt="MaxStone.pl logo" class="img-fluid" src="../assets/maxstone.png" />
+              <img
+                alt="MaxStone.pl logo"
+                class="img-fluid"
+                src="../assets/img/maxstone.png"
+              />
             </router-link>
           </div>
           <Calculator msg="MaxStone.pl Calculators" class="my-5" />
@@ -18,38 +24,40 @@
             <h2>Kalkulator</h2>
           </div>
           <div class="row calculator__label align-items-center">
-            <span class="calculator__before-txt">1</span>Automatyczne
-            wyliczenie wymiarów paneli
+            <span class="calculator__before-txt">1</span>Automatyczne wyliczenie
+            wymiarów paneli
           </div>
           <div class="row">
             <div class="input-group w-auto">
               <div class="input-group-radio">
                 <input
-                  id="calculatorPlaszczyznaPion"
-                  checked
-                  type="radio"
-                  name="calculatorPlaszczyzna"
-                  aria-label="Pionowy sposób układania paneli"
-                />
-                <label for="calculatorPlaszczyznaPion">Pion</label>
-              </div>
-              <div class="input-group-radio">
-                <input
                   id="calculatorPlaszczyznaPoziom"
+                  checked
+                  v-on:click="isRotate = false"
                   type="radio"
                   name="calculatorPlaszczyzna"
                   aria-label="Poziomy sposób układania paneli"
                 />
                 <label for="calculatorPlaszczyznaPoziom">Poziom</label>
               </div>
+              <div class="input-group-radio">
+                <input
+                  id="calculatorPlaszczyznaPion"
+                  v-on:click="isRotate = true"
+                  type="radio"
+                  name="calculatorPlaszczyzna"
+                  aria-label="Pionowy sposób układania paneli"
+                />
+                <label for="calculatorPlaszczyznaPion">Pion</label>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xl-4 p-0">
+          <div class="row mb-3 p-0">
+            <div class="col-xl-4 pl-0">
               <div class="calculator__label d-flex align-items-center">
                 <span class="calculator__before-txt">2</span>Wybierz producenta
               </div>
-              <div class="input-group">
+              <div class="input-group mt-3">
                 <select
                   class="custom-select"
                   id="calculatorPanelProducent"
@@ -62,11 +70,11 @@
                 </select>
               </div>
             </div>
-            <div class="col-xl-4 p-0">
+            <div class="col-xl-4">
               <div class="calculator__label d-flex align-items-center">
                 <span class="calculator__before-txt">3</span>Wybierz nazwę
-                </div>
-              <div class="input-group">
+              </div>
+              <div class="input-group mt-3">
                 <select
                   class="custom-select"
                   id="calculatorPanelName"
@@ -79,11 +87,11 @@
                 </select>
               </div>
             </div>
-            <div class="col-xl-4 p-0">
+            <div class="col-xl-4 pr-0">
               <div class="calculator__label d-flex align-items-center">
                 <span class="calculator__before-txt">4</span>Wybierz numer
               </div>
-              <div class="input-group">
+              <div class="input-group mt-3">
                 <select
                   class="custom-select"
                   id="calculatorPanelNumber"
@@ -98,13 +106,14 @@
             </div>
           </div>
           <div class="row calculator__label align-items-center">
-            <span class="calculator__before-txt">5</span>Wpisz wymiary projektowanego pola
+            <span class="calculator__before-txt">5</span>Wpisz wymiary
+            projektowanego pola
           </div>
           <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-4">
               <div class="input-group-prepend mt-3">
-                  <span>Wysokość</span>
-                </div>
+                <span>Wysokość</span>
+              </div>
               <div class="input-group my-3 d-flex align-items-center">
                 <input
                   type="text"
@@ -117,10 +126,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-6">
+            <div class="col-xl-4">
               <div class="input-group-prepend mt-3">
-                  <span>Szerokość</span>
-                </div>
+                <span>Szerokość</span>
+              </div>
               <div class="input-group my-3 d-flex align-items-center">
                 <input
                   type="text"
@@ -135,7 +144,8 @@
             </div>
           </div>
           <div class="row calculator__label align-items-center">
-            <span class="calculator__before-txt">6</span>Automatyczne wyliczenie ilości paneli
+            <span class="calculator__before-txt">6</span>Automatyczne wyliczenie
+            ilości paneli
           </div>
           <div class="row my-3 justify-content-center">
             <div class="col-xl-6 text-center">
@@ -145,7 +155,8 @@
             </div>
           </div>
           <div class="row calculator__label align-items-center">
-            <span class="calculator__before-txt">7</span>Automatyczne wyliczenie wymiarów paneli
+            <span class="calculator__before-txt">7</span>Automatyczne wyliczenie
+            wymiarów paneli
           </div>
           <div class="row my-3">
             <div class="col-xl-6">
@@ -168,14 +179,23 @@
         </div>
         <div class="col-xl-3 calculator__result py-4">
           <p class="calculator__result-title">Sweter Sava</p>
-          <img alt="Fllow.pl logo" class="img-fluid mb-3" src="../assets/panel.png" />
+          <img
+            alt="Sweter Sava"
+            class="img-fluid mb-3"
+            v-bind:class="{ calculator__landscape: isRotate }"
+            src="../assets/img/panel.png"
+          />
           <p class="mb-3">Model: PANEL TAPICER</p>
           <p class="mb-3">Rozmiar: 30x60</p>
           <div class="calculator__result-price">
             <span>Cena:</span>
             <div>23 776 zł</div>
             <div>
-              <img src="../assets/basket-2.png" class="img-fluid" alt="Ikona ceny" />
+              <img
+                src="../assets/img/basket-2.png"
+                class="img-fluid"
+                alt="Ikona ceny"
+              />
             </div>
           </div>
         </div>
@@ -193,9 +213,36 @@ export default {
   components: {
     Calculator,
   },
+  data() {
+    return {
+      isRotate: false,
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;900&display=swap');
+@font-face {
+  font-family: PNRegular;
+  src: url('../assets/fonts/ProximaNovaReg.ttf') format('truetype'),
+    url('../assets/fonts/ProximaNovaReg.woff') format('woff'),
+    url('../assets/fonts/ProximaNovaReg.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: PNBold;
+  src: url('../assets/fonts/ProximaNovaBold.ttf') format('truetype'),
+    url('../assets/fonts/ProximaNovaBold.woff') format('woff'),
+    url('../assets/fonts/ProximaNovaBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'PNRegular', tahoma, Arial, sans-serif;
+}
+
 .maxstone-calc {
   height: 100%;
 
@@ -207,98 +254,112 @@ export default {
   }
 
   .calculator {
-    padding-top: 2em;
-    padding-bottom: 2em;
-
     input,
-      select {
-        max-height: calc(1.6em + 24px);
-        height: calc(1.6em + 24px);
-        border-radius: 0;
-        border: none;
-      }
-
-    .calculator__label {
-      background: #e5e5e5;
-      border: 1px solid #ffffff;
-
-      .calculator__before-txt {
-        color: #fff;
-        background-color: #616970;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 22px;
-        padding: 0.8em 1.2em;
-        margin-right: 1em;
-      }
+    select {
+      max-height: calc(1.6em + 24px);
+      height: calc(1.6em + 24px);
+      border-radius: 0;
+      border: none;
     }
 
-    .input-group-radio {
-      padding: 0.375rem 0.75rem;
-      position: relative;
-      margin: 10px 0 0;
-
-      input[type='radio'] {
-        margin-right: 0.75rem;
-        margin-bottom: 0;
-        display: none;
-      }
-
-      label {
-        margin-right: 1.5rem;
-        font-size: 1em;
-
-        &::before {
-          content: ' ';
-          display: inline-block;
-          position: relative;
-          top: 5px;
-          margin: 0 5px 0 0;
-          width: 20px;
-          height: 20px;
-          border-radius: 0;
-          border: 0.75px solid#626970;
-          background-color: transparent;
-        }
-      }
-
-      input[type='radio']:checked + label::after {
-        border-radius: 0;
-        width: 12px;
-        height: 12px;
-        position: absolute;
-        top: 15px;
-        left: 16.2px;
-        content: ' ';
-        display: block;
-        background: #626970;
-      }
-    }
-
-    .calculator__result-field {
-      background-color: #616970;
-      padding: 1em;
-
-      p {
-        color: #fff;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 30px;
-        margin-bottom: 0;
-      }
+    select {
+      width: calc(100% - 1.2em);
     }
 
     .calculator__operation {
       background-color: #eceeef;
+      padding: 2em;
+      border-right: 0.5em solid #fff;
+
+      .calculator__label {
+        background: #e5e5e5;
+        border: 1px solid #ffffff;
+
+        .calculator__before-txt {
+          font-family: 'PNBold', tahoma, Arial, sans-serif;
+          color: #fff;
+          background-color: #616970;
+          font-size: 18px;
+          line-height: 22px;
+          padding: 0.8em 1.2em;
+          margin-right: 1em;
+        }
+      }
+
+      .input-group-radio {
+        padding: 0.375rem 0.75rem;
+        position: relative;
+        margin: 10px 0 0;
+
+        input[type='radio'] {
+          margin-right: 0.75rem;
+          margin-bottom: 0;
+          display: none;
+        }
+
+        label {
+          margin-right: 1.5rem;
+          font-size: 1em;
+
+          &::before {
+            content: ' ';
+            display: inline-block;
+            position: relative;
+            top: 5px;
+            margin: 0 5px 0 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 0;
+            border: 0.75px solid#626970;
+            background-color: transparent;
+          }
+        }
+
+        input[type='radio']:checked + label::after {
+          border-radius: 0;
+          width: 12px;
+          height: 12px;
+          position: absolute;
+          top: 15px;
+          left: 16.2px;
+          content: ' ';
+          display: block;
+          background: #626970;
+        }
+      }
+
+      .calculator__result-field {
+        background-color: #616970;
+        padding: 1em;
+
+        p {
+          color: #fff;
+          font-family: 'PNBold', tahoma, Arial, sans-serif;
+          font-size: 24px;
+          line-height: 30px;
+          margin-bottom: 0;
+        }
+      }
     }
 
     .calculator__result {
       background-color: #eceeef;
+      padding: 2em;
+      border-left: 0.5em solid #fff;
 
       &-title {
-        font-weight: bold;
+        font-family: 'PNBold', tahoma, Arial, sans-serif;
         font-size: 22px;
         line-height: 27px;
+      }
+
+      .calculator__portrait {
+        filter: drop-shadow(7px 7px 21px rgba(0, 0, 0, 0.23));
+      }
+
+      .calculator__landscape {
+        transform: rotate(-90deg);
+        padding: 25% 0;
       }
 
       .calculator__result-price {
@@ -307,28 +368,35 @@ export default {
 
         span {
           background-color: #fff;
-          padding: 0.5em;
-          margin-right: 0.15em;
+          padding: 0.25em 0.25em 0 0.25em;
+          margin-right: 0.25em;
           color: #616970;
-          font-weight: 500;
           font-size: 22px;
-          line-height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         div:nth-of-type(1) {
+          font-family: 'PNBold', tahoma, Arial, sans-serif;
+          font-size: 35px;
           background-color: #fff;
           width: 100%;
           text-align: center;
           color: #616970;
-          border-radius: 4px 0px 0px 4px;
-          font-weight: 800;
-          font-size: 35px;
-          line-height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.25em 0.25em 0 0.25em;
         }
 
         div:nth-of-type(2) {
           background-color: #616970;
-          padding: 1em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-left: 1.25em;
+          padding-right: 1.25em;
         }
       }
     }

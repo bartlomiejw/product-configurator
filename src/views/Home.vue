@@ -11,7 +11,7 @@
                   ><img
                     alt="Fllow.pl logo"
                     class="img-fluid"
-                    src="../assets/fllow.png"
+                    src="../assets/img/fllow.png"
                 /></router-link>
               </div>
               <div class="col-6 maxstone-wrapper">
@@ -19,7 +19,7 @@
                   <img
                     alt="Maxstone.pl logo"
                     class="img-fluid"
-                    src="../assets/maxstone.png"
+                    src="../assets/img/maxstone.png"
                   />
                 </router-link>
               </div>
@@ -44,7 +44,7 @@ export default {
 </script>
 <style lang="scss">
 .fllow-wrapper {
-  background-color: #ECEEEF;
+  background-color: #eceeef;
 }
 .maxstone-wrapper {
   background-color: #030303;
