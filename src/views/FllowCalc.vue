@@ -1,18 +1,12 @@
 <template>
   <div class="fllow-calc">
-    <div
-      class="container-fluid d-flex flex-column justify-content-center align-items-center h-100"
-    >
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center h-100">
       <div class="row w-100">
         <div class="col-xl-12 p-0">
           <router-link to="/">Wróć na strone główną</router-link>
           <div class="fllow-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
-              <img
-                alt="Fllow.pl logo"
-                class="img-fluid"
-                src="../assets/img/fllow.png"
-              />
+              <img alt="Fllow.pl logo" class="img-fluid" src="../assets/img/fllow.png" />
             </router-link>
           </div>
           <Calculator msg="Fllow.pl Calculator" class="my-5" />
@@ -24,8 +18,7 @@
           <div class="row">
             <div class="col-xl-6">
               <p>
-                <span class="calculator__before-txt">01.</span>Sposób układania
-                paneli na ścianie
+                <span class="calculator__before-txt">01.</span>Sposób układania paneli na ścianie
               </p>
               <div class="input-group w-auto">
                 <div class="input-group-radio">
@@ -52,10 +45,7 @@
               </div>
             </div>
             <div class="col-xl-6">
-              <p>
-                <span class="calculator__before-txt">02.</span>Wybierz
-                producenta
-              </p>
+              <p><span class="calculator__before-txt">02.</span>Wybierz producenta</p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span>Producent</span>
@@ -63,24 +53,18 @@
                 <select
                   class="custom-select"
                   id="calculatorPanelProducent"
-                  v-model="formResults.calculatorPanelProducent"
+                  v-model="formResults.panelProducent"
                   aria-label="Wybierz producenta"
                 >
-                  <option disabled value="">Wybierz...</option>
-                  <option
-                    v-for="panel in panels"
-                    :key="panel.id"
-                    :value="panel.producent"
-                  >
+                  <option disabled selected value="">Wybierz...</option>
+                  <option v-for="panel in panels" :key="panel.id" :value="panel.producent">
                     {{ panel.producent }}
                   </option>
                 </select>
               </div>
             </div>
             <div class="col-xl-6">
-              <p>
-                <span class="calculator__before-txt">02.</span>Wybierz nazwę
-              </p>
+              <p><span class="calculator__before-txt">02.</span>Wybierz nazwę</p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span>Nazwa</span>
@@ -88,24 +72,22 @@
                 <select
                   class="custom-select"
                   id="calculatorPanelName"
-                  v-model="formResults.calculatorPanelName"
+                  v-model="formResults.panelName"
                   aria-label="Wybierz nazwę panela"
                 >
-                  <option disabled value="">Wybierz...</option>
+                  <option disabled selected value="">Wybierz...</option>
                   <option
-                    v-for="name in formResults.name"
-                    :key="name"
-                    :value="name"
+                    v-for="filterName in filterNames"
+                    :key="filterName.id"
+                    :value="filterName.name"
                   >
-                    {{ name }}
+                    {{ filterName.name }}
                   </option>
                 </select>
               </div>
             </div>
             <div class="col-xl-6">
-              <p>
-                <span class="calculator__before-txt">03.</span>Wybierz numer
-              </p>
+              <p><span class="calculator__before-txt">03.</span>Wybierz numer</p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span>Numer</span>
@@ -113,24 +95,23 @@
                 <select
                   class="custom-select"
                   id="calculatorPanelNumber"
-                  v-model="formResults.calculatorPanelNumber"
+                  v-model="formResults.panelNumber"
                   aria-label="Wybierz numer panela"
                 >
-                  <option disabled value="">Wybierz...</option>
+                  <option disabled selected value="">Wybierz...</option>
                   <option
-                    v-for="panel in panels"
-                    :key="panel.id"
-                    :value="panel.number"
+                    v-for="filterNumber in filterNumbers"
+                    :key="filterNumber.id"
+                    :value="filterNumber.number"
                   >
-                    {{ panel.number }}
+                    {{ filterNumber.number }}
                   </option>
                 </select>
               </div>
             </div>
             <div class="col-xl-12">
               <p>
-                <span class="calculator__before-txt">04.</span>Wpisz wymiary
-                projektowanego pola
+                <span class="calculator__before-txt">04.</span>Wpisz wymiary projektowanego pola
               </p>
               <div class="row">
                 <div class="col-xl-6">
@@ -169,8 +150,7 @@
             </div>
             <div class="col-xl-6">
               <p>
-                <span class="calculator__before-txt">05.</span>Automatyczne
-                wyliczenie ilości paneli
+                <span class="calculator__before-txt">05.</span>Automatyczne wyliczenie ilości paneli
               </p>
               <div class="row justify-content-end">
                 <div class="calculator__result-field">
@@ -180,8 +160,8 @@
             </div>
             <div class="col-xl-6">
               <p>
-                <span class="calculator__before-txt">06.</span>Automatyczne
-                wyliczenie wymiarów paneli
+                <span class="calculator__before-txt">06.</span>Automatyczne wyliczenie wymiarów
+                paneli
               </p>
               <div class="row justify-content-end mb-3">
                 <div class="calculator__result-field-before">
@@ -216,11 +196,7 @@
             <span>Cena:</span>
             <div>23 776 zł</div>
             <div>
-              <img
-                src="../assets/img/basket.png"
-                class="img-fluid"
-                alt="Ikona ceny"
-              />
+              <img src="../assets/img/basket.png" class="img-fluid" alt="Ikona ceny" />
             </div>
           </div>
         </div>
@@ -245,7 +221,7 @@ export default {
         {
           id: '1',
           producent: 'Sava',
-          number: '109SSVA92',
+          number: '109',
           name: 'Sweter',
           price: '10',
           img: '../assets/img/panel.png',
@@ -254,7 +230,25 @@ export default {
         {
           id: '2',
           producent: 'Osava',
-          number: '222SSVA92',
+          number: '110',
+          name: 'Niemake',
+          price: '15',
+          img: '../assets/img/panel.png',
+          size: '30x60',
+        },
+        {
+          id: '3',
+          producent: 'Osava',
+          number: '111',
+          name: 'Make Me',
+          price: '15',
+          img: '../assets/img/panel.png',
+          size: '30x60',
+        },
+        {
+          id: '4',
+          producent: 'Sosava',
+          number: '112',
           name: 'Make',
           price: '15',
           img: '../assets/img/panel.png',
@@ -262,9 +256,9 @@ export default {
         },
       ],
       formResults: {
-        calculatorPanelProducent: '',
-        calculatorPanelName: '',
-        calculatorPanelNumber: '',
+        panelProducent: '',
+        panelName: '',
+        panelNumber: '',
       },
     };
   },
@@ -272,11 +266,11 @@ export default {
     fullName() {
       return Object.values(this.formResults).join(' ');
     },
-    findProduct() {
-      if (this.panels.producent === this.formResults.calculatorPanelProducent) {
-        return Object.values(this.panels);
-      }
-      return this.panels.name;
+    filterNames() {
+      return this.panels.filter((obj) => obj.producent === this.formResults.panelProducent);
+    },
+    filterNumbers() {
+      return this.filterNames.filter((obj) => obj.name === this.formResults.panelName);
     },
   },
 };
