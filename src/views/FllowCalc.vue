@@ -195,7 +195,7 @@
           <p class="mb-3">Rozmiar: 30x60</p>
           <div class="calculator__result-price">
             <span>Cena:</span>
-            <div>23 776 zł</div>
+            <div>{{ priceResult }} zł</div>
             <div>
               <img src="../assets/img/basket.png" class="img-fluid" alt="Ikona ceny" />
             </div>
@@ -220,45 +220,44 @@ export default {
       isHorizontal: false,
       panels: [
         {
-          id: '1',
+          id: 0,
           producent: 'Sava',
           number: '109',
           name: 'Sweter',
-          price: '10',
+          price: 10,
           img: '../assets/img/panel.png',
           size: '30x60',
         },
         {
-          id: '2',
+          id: 1,
           producent: 'Osava',
-          number: '110',
           name: 'Niemake',
-          price: '15',
+          number: '110',
+          price: 15,
           img: '../assets/img/panel.png',
           size: '30x60',
         },
         {
-          id: '3',
+          id: 2,
           producent: 'Osava',
-          number: '111',
           name: 'Make Me',
-          price: '15',
+          number: '111',
+          price: 25,
           img: '../assets/img/panel.png',
           size: '30x60',
         },
         {
-          id: '4',
+          id: 3,
           producent: 'Sosava',
-          number: '112',
           name: 'Make',
-          price: '15',
+          number: '112',
+          price: 15,
           img: '../assets/img/panel.png',
           size: '30x60',
         },
       ],
       dimensions: [
         {
-          id: '1',
           width: 30,
           height: 60,
         },
@@ -283,13 +282,19 @@ export default {
       return filteredArray;
     },
     fullName() {
-      return Object.values(this.formResults).join(' ');
+      if (!this.formResults.panelNumber) return 'Nazwa';
+      return `${this.formResults.panelProducent} ${this.formResults.panelName} ${this.formResults.panelNumber}`;
     },
     filterNames() {
       return this.panels.filter((obj) => obj.producent === this.formResults.panelProducent);
     },
     filterNumbers() {
       return this.filterNames.filter((obj) => obj.name === this.formResults.panelName);
+    },
+    filterId() {
+      return this.panels
+        .filter((obj) => obj.number === this.formResults.panelNumber)
+        .map((obj) => obj.id);
     },
     quantityWidth() {
       if (this.isHorizontal) {
@@ -316,13 +321,20 @@ export default {
       return roundHeight;
     },
     quantity() {
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '';
       return this.quantityWidth * this.quantityHeight;
     },
     widthResult() {
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '';
       return parseInt(this.formResults.fieldWidth, 10) / this.quantityWidth;
     },
     heightResult() {
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '';
       return parseInt(this.formResults.fieldHeight, 10) / this.quantityHeight;
+    },
+    priceResult() {
+      if (!this.quantity) return '0';
+      return this.panels[this.filterId].price * this.quantity;
     },
   },
 };
