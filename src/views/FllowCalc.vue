@@ -23,24 +23,24 @@
               <div class="input-group w-auto">
                 <div class="input-group-radio">
                   <input
-                    id="calculatorPlaszczyznaPoziom"
+                    id="fieldHorizontal"
                     checked
-                    v-on:click="isRotate = false"
+                    name="field"
+                    v-on:click="isHorizontal = false"
                     type="radio"
-                    name="calculatorPlaszczyzna"
                     aria-label="Poziomy sposób układania paneli"
                   />
-                  <label for="calculatorPlaszczyznaPoziom">Poziom</label>
+                  <label for="fieldHorizontal">Poziom</label>
                 </div>
                 <div class="input-group-radio">
                   <input
-                    id="calculatorPlaszczyznaPion"
-                    v-on:click="isRotate = true"
+                    id="fieldVertical"
+                    name="field"
+                    v-on:click="isHorizontal = true"
                     type="radio"
-                    name="calculatorPlaszczyzna"
                     aria-label="Pionowy sposób układania paneli"
                   />
-                  <label for="calculatorPlaszczyznaPion">Pion</label>
+                  <label for="fieldVertical">Pion</label>
                 </div>
               </div>
             </div>
@@ -52,14 +52,17 @@
                 </div>
                 <select
                   class="custom-select"
-                  id="calculatorPanelProducent"
+                  id="panelProducent"
                   v-model="formResults.panelProducent"
                   aria-label="Wybierz producenta"
                 >
                   <option disabled selected value="">Wybierz...</option>
-                  <option v-for="panel in panels" :key="panel.id" :value="panel.producent">
-                    {{ panel.producent }}
-                  </option>
+                  <option
+                    v-for="producent in uniqueProducent"
+                    :key="producent"
+                    :value="producent"
+                    v-text="producent"
+                  ></option>
                 </select>
               </div>
             </div>
@@ -71,7 +74,7 @@
                 </div>
                 <select
                   class="custom-select"
-                  id="calculatorPanelName"
+                  id="panelName"
                   v-model="formResults.panelName"
                   aria-label="Wybierz nazwę panela"
                 >
@@ -80,9 +83,8 @@
                     v-for="filterName in filterNames"
                     :key="filterName.id"
                     :value="filterName.name"
-                  >
-                    {{ filterName.name }}
-                  </option>
+                    v-text="filterName.name"
+                  ></option>
                 </select>
               </div>
             </div>
@@ -94,7 +96,7 @@
                 </div>
                 <select
                   class="custom-select"
-                  id="calculatorPanelNumber"
+                  id="panelNumber"
                   v-model="formResults.panelNumber"
                   aria-label="Wybierz numer panela"
                 >
@@ -103,9 +105,8 @@
                     v-for="filterNumber in filterNumbers"
                     :key="filterNumber.id"
                     :value="filterNumber.number"
-                  >
-                    {{ filterNumber.number }}
-                  </option>
+                    v-text="filterNumber.number"
+                  ></option>
                 </select>
               </div>
             </div>
@@ -122,7 +123,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      name="calculatorPanelHeight"
+                      v-model="formResults.fieldHeight"
                       aria-label="Wysokość projektowanego pola"
                     />
                     <div class="input-group-append">
@@ -138,7 +139,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      name="calculatorPanelWidth"
+                      v-model="formResults.fieldWidth"
                       aria-label="Szerokość projektowanego pola"
                     />
                     <div class="input-group-append">
@@ -154,7 +155,7 @@
               </p>
               <div class="row justify-content-end">
                 <div class="calculator__result-field">
-                  <p>2120 szt.</p>
+                  <p>{{ quantity }} szt.</p>
                 </div>
               </div>
             </div>
@@ -165,18 +166,18 @@
               </p>
               <div class="row justify-content-end mb-3">
                 <div class="calculator__result-field-before">
-                  <span>Wysokość </span>
+                  <span>Wysokość</span>
                 </div>
                 <div class="calculator__result-field">
-                  <p>2120 cm</p>
+                  <p>{{ heightResult }} cm</p>
                 </div>
               </div>
               <div class="row justify-content-end">
                 <div class="calculator__result-field-before">
-                  <span>Szerokość </span>
+                  <span>Szerokość</span>
                 </div>
                 <div class="calculator__result-field">
-                  <p>2120 cm</p>
+                  <p>{{ widthResult }} cm</p>
                 </div>
               </div>
             </div>
@@ -187,7 +188,7 @@
           <img
             alt="Sweter Sava"
             class="img-fluid my-5"
-            v-bind:class="{ calculator__landscape: isRotate }"
+            v-bind:class="{ calculator__landscape: isHorizontal }"
             src="../assets/img/panel.png"
           />
           <p class="mb-3">Model: {{ fullName }}</p>
@@ -216,7 +217,7 @@ export default {
   },
   data() {
     return {
-      isRotate: false,
+      isHorizontal: false,
       panels: [
         {
           id: '1',
@@ -255,14 +256,32 @@ export default {
           size: '30x60',
         },
       ],
+      dimensions: [
+        {
+          id: '1',
+          width: 30,
+          height: 60,
+        },
+      ],
       formResults: {
         panelProducent: '',
         panelName: '',
         panelNumber: '',
+        fieldWidth: '',
+        fieldHeight: '',
       },
     };
   },
   computed: {
+    uniqueProducent() {
+      const filteredArray = [];
+      for (let i = 0; i < this.panels.length; i += 1) {
+        if (filteredArray.indexOf(this.panels[i].producent) === -1) {
+          filteredArray.push(this.panels[i].producent);
+        }
+      }
+      return filteredArray;
+    },
     fullName() {
       return Object.values(this.formResults).join(' ');
     },
@@ -271,6 +290,39 @@ export default {
     },
     filterNumbers() {
       return this.filterNames.filter((obj) => obj.name === this.formResults.panelName);
+    },
+    quantityWidth() {
+      if (this.isHorizontal) {
+        const quantityWidth = parseInt(this.formResults.fieldWidth, 10) / 30;
+        const roundWidth = Math.ceil(quantityWidth);
+
+        return roundWidth;
+      }
+      const quantityWidth = parseInt(this.formResults.fieldWidth, 10) / 60;
+      const roundWidth = Math.ceil(quantityWidth);
+
+      return roundWidth;
+    },
+    quantityHeight() {
+      if (this.isHorizontal) {
+        const quantityHeight = parseInt(this.formResults.fieldHeight, 10) / 60;
+        const roundHeight = Math.ceil(quantityHeight);
+
+        return roundHeight;
+      }
+      const quantityHeight = parseInt(this.formResults.fieldHeight, 10) / 30;
+      const roundHeight = Math.ceil(quantityHeight);
+
+      return roundHeight;
+    },
+    quantity() {
+      return this.quantityWidth * this.quantityHeight;
+    },
+    widthResult() {
+      return parseInt(this.formResults.fieldWidth, 10) / this.quantityWidth;
+    },
+    heightResult() {
+      return parseInt(this.formResults.fieldHeight, 10) / this.quantityHeight;
     },
   },
 };
