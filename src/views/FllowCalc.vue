@@ -1,6 +1,6 @@
 <template>
   <div class="fllow-calc">
-    <div class="container-fluid d-flex flex-column justify-content-center align-items-center h-100">
+    <div class="container-fluid">
       <div class="row w-100">
         <div class="col-xl-12 p-0">
           <router-link to="/">Wróć na strone główną</router-link>
@@ -124,6 +124,7 @@
                       type="text"
                       class="form-control"
                       v-model="formResults.fieldHeight"
+                      maxlength="10"
                       aria-label="Wysokość projektowanego pola"
                     />
                     <div class="input-group-append">
@@ -140,6 +141,7 @@
                       type="text"
                       class="form-control"
                       v-model="formResults.fieldWidth"
+                      maxlength="10"
                       aria-label="Szerokość projektowanego pola"
                     />
                     <div class="input-group-append">
@@ -189,7 +191,7 @@
             alt="Sweter Sava"
             class="img-fluid my-5"
             v-bind:class="{ calculator__landscape: isHorizontal }"
-            src="../assets/img/panel.png"
+            :src="require('@/assets/img/' + filterImg() + '')"
           />
           <p class="mb-3">Model: {{ fullName }}</p>
           <p class="mb-3">Rozmiar: 30x60</p>
@@ -222,44 +224,42 @@ export default {
         {
           id: 0,
           producent: 'Sava',
-          number: '109',
+          number: 'SS16',
           name: 'Sweter',
           price: 10,
-          img: '../assets/img/panel.png',
-          size: '30x60',
+          img: 'sweter.png',
+          width: 60,
+          height: 30,
         },
         {
           id: 1,
-          producent: 'Osava',
-          name: 'Niemake',
-          number: '110',
+          producent: 'Flamingo',
+          name: 'Flamingo',
+          number: 'FF1',
           price: 15,
-          img: '../assets/img/panel.png',
-          size: '30x60',
+          img: 'flamingo.png',
+          width: 60,
+          height: 30,
         },
         {
           id: 2,
-          producent: 'Osava',
-          name: 'Make Me',
-          number: '111',
+          producent: 'Mięta',
+          name: 'Mięta',
+          number: '1',
           price: 25,
-          img: '../assets/img/panel.png',
-          size: '30x60',
+          img: 'mieta.png',
+          width: 60,
+          height: 30,
         },
         {
           id: 3,
-          producent: 'Sosava',
-          name: 'Make',
-          number: '112',
-          price: 15,
-          img: '../assets/img/panel.png',
-          size: '30x60',
-        },
-      ],
-      dimensions: [
-        {
-          width: 30,
-          height: 60,
+          producent: 'Musztarda',
+          name: 'Musztarda',
+          number: 'MM1',
+          price: 35,
+          img: 'musztarda.png',
+          width: 60,
+          height: 30,
         },
       ],
       formResults: {
@@ -270,6 +270,15 @@ export default {
         fieldHeight: '',
       },
     };
+  },
+  methods: {
+    filterImg() {
+      if (!this.formResults.panelNumber) return 'default-fllow.jpg';
+      const imgSrc = this.panels
+        .filter((obj) => obj.number === this.formResults.panelNumber)
+        .map((obj) => obj.img);
+      return `${imgSrc}`;
+    },
   },
   computed: {
     uniqueProducent() {
@@ -325,12 +334,16 @@ export default {
       return this.quantityWidth * this.quantityHeight;
     },
     widthResult() {
-      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '';
-      return parseInt(this.formResults.fieldWidth, 10) / this.quantityWidth;
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '0';
+      return (
+        Math.round((parseInt(this.formResults.fieldWidth, 10) / this.quantityWidth) * 100) / 100
+      );
     },
     heightResult() {
-      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '';
-      return parseInt(this.formResults.fieldHeight, 10) / this.quantityHeight;
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '0';
+      return (
+        Math.round((parseInt(this.formResults.fieldHeight, 10) / this.quantityHeight) * 100) / 100
+      );
     },
     priceResult() {
       if (!this.quantity) return '0';
