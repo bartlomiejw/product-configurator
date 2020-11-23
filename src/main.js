@@ -9,4 +9,7 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   render: (h) => h(App),
+  created() {
+    document.title = 'Fllow.pl - kalkulator produktu';
+  },
 }).$mount('#app');

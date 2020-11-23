@@ -1,15 +1,14 @@
 <template>
   <div class="maxstone-calc">
-    <div class="container-fluid d-flex flex-column justify-content-center align-items-center h-100">
+    <div class="container">
       <div class="row w-100">
         <div class="col-xl-12 p-0">
-          <router-link to="/">Wróć na strone główną</router-link>
           <div class="maxstone-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
               <img alt="MaxStone.pl logo" class="img-fluid" src="../assets/img/maxstone.png" />
             </router-link>
           </div>
-          <Calculator msg="MaxStone.pl Calculators" class="my-5" />
+          <Header msg="MaxStone.pl - kalkulator produktu" class="mb-5" />
         </div>
       </div>
       <div class="row calculator w-100">
@@ -206,12 +205,12 @@
 
 <script>
 // @ is an alias to /src
-import Calculator from '@/components/Calculator.vue';
+import Header from '@/components/Header.vue';
 
 export default {
   name: 'MaxstoneCalc',
   components: {
-    Calculator,
+    Header,
   },
   data() {
     return {

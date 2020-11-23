@@ -1,15 +1,14 @@
 <template>
   <div class="fllow-calc">
-    <div class="container-fluid">
+    <div class="container">
       <div class="row w-100">
         <div class="col-xl-12 p-0">
-          <router-link to="/">Wróć na strone główną</router-link>
           <div class="fllow-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
               <img alt="Fllow.pl logo" class="img-fluid" src="../assets/img/fllow.png" />
             </router-link>
           </div>
-          <Calculator msg="Fllow.pl Calculator" class="my-5" />
+          <Header msg="Fllow.pl - kalkulator produktu" class="mb-5" />
         </div>
       </div>
       <div class="row calculator">
@@ -186,7 +185,7 @@
           </div>
         </div>
         <div class="col-xl-3 calculator__result">
-          <p class="calculator__result-title">Wynik</p>
+          <p class="calculator__result-title">Rezultat</p>
           <img
             alt="Sweter Sava"
             class="img-fluid my-5"
@@ -210,12 +209,12 @@
 
 <script>
 // @ is an alias to /src
-import Calculator from '@/components/Calculator.vue';
+import Header from '@/components/Header.vue';
 
 export default {
   name: 'FllowCalc',
   components: {
-    Calculator,
+    Header,
   },
   data() {
     return {

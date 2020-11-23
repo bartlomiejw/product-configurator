@@ -1,16 +1,13 @@
 <template>
   <div class="home h-100">
-    <div class="container h-100 d-flex align-items-center">
+    <div class="container h-100 d-flex align-items-center justify-content-center">
       <div class="row">
-        <div class="col-xl-12">
-          <Calculator class="text-center" msg="Choose view of calculator" />
-        </div>
-        <div class="col-xl-6 fllow-wrapper">
+        <div class="col-xl-12 fllow-wrapper">
           <router-link class="p-5 text-center" to="/fllow-calc"
             ><img alt="Fllow.pl logo" class="img-fluid" src="../assets/img/fllow.png"
           /></router-link>
         </div>
-        <div class="col-xl-6 maxstone-wrapper">
+        <div class="col-xl-12 maxstone-wrapper">
           <router-link class="p-5 text-center" to="/maxstone-calc">
             <img alt="Maxstone.pl logo" class="img-fluid" src="../assets/img/maxstone.png" />
           </router-link>
@@ -22,13 +19,9 @@
 
 <script>
 // @ is an alias to /src
-import Calculator from '@/components/Calculator.vue';
 
 export default {
   name: 'Home',
-  components: {
-    Calculator,
-  },
 };
 </script>
 <style lang="scss">
