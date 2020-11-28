@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "panels",
+  "collectionName": "maxstones",
   "info": {
-    "name": "fllow",
-    "description": ""
+    "name": "Maxstone"
   },
   "options": {
     "increments": true,
@@ -25,12 +24,13 @@
     },
     "number": {
       "type": "string",
+      "required": true,
       "maxLength": 16,
-      "minLength": 4,
-      "required": true
+      "minLength": 4
     },
     "price": {
       "type": "decimal",
+      "unique": false,
       "required": true
     },
     "width": {

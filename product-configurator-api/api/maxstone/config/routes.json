@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/maxstones",
+      "handler": "maxstone.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/maxstones/count",
+      "handler": "maxstone.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/maxstones/:id",
+      "handler": "maxstone.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/maxstones",
+      "handler": "maxstone.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/maxstones/:id",
+      "handler": "maxstone.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/maxstones/:id",
+      "handler": "maxstone.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

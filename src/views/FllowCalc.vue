@@ -1,11 +1,18 @@
 <template>
   <div class="fllow-calc">
     <div class="container">
+      <div v-for="panel in panels" :key="panel.id">
+        {{ panel.img[0].url }}
+      </div>
       <div class="row w-100">
         <div class="col-xl-12 p-0">
           <div class="fllow-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
-              <img alt="Fllow.pl logo" class="img-fluid" src="../assets/img/fllow.png" />
+              <img
+                alt="Fllow.pl logo"
+                class="img-fluid"
+                src="../assets/img/fllow.png"
+              />
             </router-link>
           </div>
           <Header msg="Fllow.pl - kalkulator produktu" class="mb-5" />
@@ -17,7 +24,8 @@
           <div class="row">
             <div class="col-xl-6">
               <p>
-                <span class="calculator__before-txt">01.</span>Sposób układania paneli na ścianie
+                <span class="calculator__before-txt">01.</span>Sposób układania
+                paneli na ścianie
               </p>
               <div class="input-group w-auto">
                 <div class="input-group-radio">
@@ -25,9 +33,9 @@
                     id="fieldHorizontal"
                     checked
                     name="field"
-                    v-on:click="isHorizontal = false"
                     type="radio"
                     aria-label="Poziomy sposób układania paneli"
+                    @click="isHorizontal = false"
                   />
                   <label for="fieldHorizontal">Poziom</label>
                 </div>
@@ -35,24 +43,27 @@
                   <input
                     id="fieldVertical"
                     name="field"
-                    v-on:click="isHorizontal = true"
                     type="radio"
                     aria-label="Pionowy sposób układania paneli"
+                    @click="isHorizontal = true"
                   />
                   <label for="fieldVertical">Pion</label>
                 </div>
               </div>
             </div>
             <div class="col-xl-6">
-              <p><span class="calculator__before-txt">02.</span>Wybierz producenta</p>
+              <p>
+                <span class="calculator__before-txt">02.</span>Wybierz
+                producenta
+              </p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span>Producent</span>
                 </div>
                 <select
-                  class="custom-select"
                   id="panelProducent"
                   v-model="formResults.panelProducent"
+                  class="custom-select"
                   aria-label="Wybierz producenta"
                 >
                   <option disabled selected value="">Wybierz...</option>
@@ -66,15 +77,17 @@
               </div>
             </div>
             <div class="col-xl-6">
-              <p><span class="calculator__before-txt">02.</span>Wybierz nazwę</p>
+              <p>
+                <span class="calculator__before-txt">02.</span>Wybierz nazwę
+              </p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span>Nazwa</span>
                 </div>
                 <select
-                  class="custom-select"
                   id="panelName"
                   v-model="formResults.panelName"
+                  class="custom-select"
                   aria-label="Wybierz nazwę panela"
                 >
                   <option disabled selected value="">Wybierz...</option>
@@ -88,15 +101,17 @@
               </div>
             </div>
             <div class="col-xl-6">
-              <p><span class="calculator__before-txt">03.</span>Wybierz numer</p>
+              <p>
+                <span class="calculator__before-txt">03.</span>Wybierz numer
+              </p>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span>Numer</span>
                 </div>
                 <select
-                  class="custom-select"
                   id="panelNumber"
                   v-model="formResults.panelNumber"
+                  class="custom-select"
                   aria-label="Wybierz numer panela"
                 >
                   <option disabled selected value="">Wybierz...</option>
@@ -111,7 +126,8 @@
             </div>
             <div class="col-xl-12">
               <p>
-                <span class="calculator__before-txt">04.</span>Wpisz wymiary projektowanego pola
+                <span class="calculator__before-txt">04.</span>Wpisz wymiary
+                projektowanego pola
               </p>
               <div class="row">
                 <div class="col-xl-6">
@@ -120,9 +136,9 @@
                       <span>Wysokość</span>
                     </div>
                     <input
+                      v-model="formResults.fieldHeight"
                       type="text"
                       class="form-control"
-                      v-model="formResults.fieldHeight"
                       maxlength="10"
                       aria-label="Wysokość projektowanego pola"
                     />
@@ -137,9 +153,9 @@
                       <span>Szerokość</span>
                     </div>
                     <input
+                      v-model="formResults.fieldWidth"
                       type="text"
                       class="form-control"
-                      v-model="formResults.fieldWidth"
                       maxlength="10"
                       aria-label="Szerokość projektowanego pola"
                     />
@@ -152,7 +168,8 @@
             </div>
             <div class="col-xl-6">
               <p>
-                <span class="calculator__before-txt">05.</span>Automatyczne wyliczenie ilości paneli
+                <span class="calculator__before-txt">05.</span>Automatyczne
+                wyliczenie ilości paneli
               </p>
               <div class="row justify-content-end">
                 <div class="calculator__result-field">
@@ -162,8 +179,8 @@
             </div>
             <div class="col-xl-6">
               <p>
-                <span class="calculator__before-txt">06.</span>Automatyczne wyliczenie wymiarów
-                paneli
+                <span class="calculator__before-txt">06.</span>Automatyczne
+                wyliczenie wymiarów paneli
               </p>
               <div class="row justify-content-end mb-3">
                 <div class="calculator__result-field-before">
@@ -189,8 +206,8 @@
           <img
             alt="Sweter Sava"
             class="img-fluid my-5"
-            v-bind:class="{ calculator__landscape: isHorizontal }"
-            :src="require('@/assets/img/' + filterImg() + '')"
+            :class="{ calculator__landscape: isHorizontal }"
+            :src="filterImg()"
           />
           <p class="mb-3">Model: {{ fullName }}</p>
           <p class="mb-3">Rozmiar: 30x60</p>
@@ -198,7 +215,11 @@
             <span>Cena:</span>
             <div>{{ priceResult }} zł</div>
             <div>
-              <img src="../assets/img/basket.png" class="img-fluid" alt="Ikona ceny" />
+              <img
+                src="../assets/img/basket.png"
+                class="img-fluid"
+                alt="Ikona ceny"
+              />
             </div>
           </div>
         </div>
@@ -209,147 +230,138 @@
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue';
+import Header from '@/components/Header.vue'
+import gql from 'graphql-tag'
 
 export default {
   name: 'FllowCalc',
   components: {
-    Header,
+    Header
   },
   data() {
     return {
+      api_url: 'http://localhost:1337',
       isHorizontal: false,
-      panels: [
-        {
-          id: 0,
-          producent: 'Sava',
-          number: 'SS16',
-          name: 'Sweter',
-          price: 10,
-          img: 'sweter.png',
-          width: 60,
-          height: 30,
-        },
-        {
-          id: 1,
-          producent: 'Flamingo',
-          name: 'Flamingo',
-          number: 'FF1',
-          price: 15,
-          img: 'flamingo.png',
-          width: 60,
-          height: 30,
-        },
-        {
-          id: 2,
-          producent: 'Mięta',
-          name: 'Mięta',
-          number: '1',
-          price: 25,
-          img: 'mieta.png',
-          width: 60,
-          height: 30,
-        },
-        {
-          id: 3,
-          producent: 'Musztarda',
-          name: 'Musztarda',
-          number: 'MM1',
-          price: 35,
-          img: 'musztarda.png',
-          width: 60,
-          height: 30,
-        },
-      ],
       formResults: {
         panelProducent: '',
         panelName: '',
         panelNumber: '',
         fieldWidth: '',
-        fieldHeight: '',
-      },
-    };
+        fieldHeight: ''
+      }
+    }
   },
-  methods: {
-    filterImg() {
-      if (!this.formResults.panelNumber) return 'default-fllow.jpg';
-      const imgSrc = this.panels
-        .filter((obj) => obj.number === this.formResults.panelNumber)
-        .map((obj) => obj.img);
-      return `${imgSrc}`;
-    },
+  apollo: {
+    panels: gql`
+      query {
+        panels {
+          id
+          producent
+          name
+          number
+          price
+          img {
+            url
+          }
+          width
+          height
+        }
+      }
+    `
   },
   computed: {
     uniqueProducent() {
-      const filteredArray = [];
+      const filteredArray = []
       for (let i = 0; i < this.panels.length; i += 1) {
         if (filteredArray.indexOf(this.panels[i].producent) === -1) {
-          filteredArray.push(this.panels[i].producent);
+          filteredArray.push(this.panels[i].producent)
         }
       }
-      return filteredArray;
+      return filteredArray
     },
     fullName() {
-      if (!this.formResults.panelNumber) return 'Nazwa';
-      return `${this.formResults.panelProducent} ${this.formResults.panelName} ${this.formResults.panelNumber}`;
+      if (!this.formResults.panelNumber) return 'Nazwa'
+      return `${this.formResults.panelProducent} ${this.formResults.panelName} ${this.formResults.panelNumber}`
     },
     filterNames() {
-      return this.panels.filter((obj) => obj.producent === this.formResults.panelProducent);
+      return this.panels.filter(
+        (obj) => obj.producent === this.formResults.panelProducent
+      )
     },
     filterNumbers() {
-      return this.filterNames.filter((obj) => obj.name === this.formResults.panelName);
+      return this.filterNames.filter(
+        (obj) => obj.name === this.formResults.panelName
+      )
     },
     filterId() {
       return this.panels
         .filter((obj) => obj.number === this.formResults.panelNumber)
-        .map((obj) => obj.id);
+        .map((obj) => obj.id)
     },
     quantityWidth() {
       if (this.isHorizontal) {
-        const quantityWidth = parseInt(this.formResults.fieldWidth, 10) / 30;
-        const roundWidth = Math.ceil(quantityWidth);
+        const quantityWidth = parseInt(this.formResults.fieldWidth, 10) / 30
+        const roundWidth = Math.ceil(quantityWidth)
 
-        return roundWidth;
+        return roundWidth
       }
-      const quantityWidth = parseInt(this.formResults.fieldWidth, 10) / 60;
-      const roundWidth = Math.ceil(quantityWidth);
+      const quantityWidth = parseInt(this.formResults.fieldWidth, 10) / 60
+      const roundWidth = Math.ceil(quantityWidth)
 
-      return roundWidth;
+      return roundWidth
     },
     quantityHeight() {
       if (this.isHorizontal) {
-        const quantityHeight = parseInt(this.formResults.fieldHeight, 10) / 60;
-        const roundHeight = Math.ceil(quantityHeight);
+        const quantityHeight = parseInt(this.formResults.fieldHeight, 10) / 60
+        const roundHeight = Math.ceil(quantityHeight)
 
-        return roundHeight;
+        return roundHeight
       }
-      const quantityHeight = parseInt(this.formResults.fieldHeight, 10) / 30;
-      const roundHeight = Math.ceil(quantityHeight);
+      const quantityHeight = parseInt(this.formResults.fieldHeight, 10) / 30
+      const roundHeight = Math.ceil(quantityHeight)
 
-      return roundHeight;
+      return roundHeight
     },
     quantity() {
-      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '';
-      return this.quantityWidth * this.quantityHeight;
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth)
+        return ''
+      return this.quantityWidth * this.quantityHeight
     },
     widthResult() {
-      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '0';
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth)
+        return '0'
       return (
-        Math.round((parseInt(this.formResults.fieldWidth, 10) / this.quantityWidth) * 100) / 100
-      );
+        Math.round(
+          (parseInt(this.formResults.fieldWidth, 10) / this.quantityWidth) * 100
+        ) / 100
+      )
     },
     heightResult() {
-      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth) return '0';
+      if (!this.formResults.fieldWidth && !this.formResults.fieldWidth)
+        return '0'
       return (
-        Math.round((parseInt(this.formResults.fieldHeight, 10) / this.quantityHeight) * 100) / 100
-      );
+        Math.round(
+          (parseInt(this.formResults.fieldHeight, 10) / this.quantityHeight) *
+            100
+        ) / 100
+      )
     },
     priceResult() {
-      if (!this.quantity) return '0';
-      return this.panels[this.filterId].price * this.quantity;
-    },
+      if (!this.quantity) return '0'
+      return this.panels[this.filterId].price * this.quantity
+    }
   },
-};
+  methods: {
+    filterImg() {
+      if (!this.formResults.panelNumber)
+        return require('@/assets/img/default-fllow.jpg')
+      const imgSrc = this.panels
+        .filter((obj) => obj.number === this.formResults.panelNumber)
+        .map((obj) => obj.img[0].url)
+      return `${this.api_url}${imgSrc}`
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;900&display=swap');

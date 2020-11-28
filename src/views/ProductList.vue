@@ -5,7 +5,11 @@
         <div class="col-xl-12 p-0">
           <div class="fllow-wrapper text-center">
             <router-link class="p-5" to="/fllow-calc">
-              <img alt="Fllow.pl logo" class="img-fluid" src="../assets/img/fllow.png" />
+              <img
+                alt="Fllow.pl logo"
+                class="img-fluid"
+                src="../assets/img/fllow.png"
+              />
             </router-link>
           </div>
           <Header msg="Lista produktów" class="mb-5" />
@@ -27,7 +31,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nazwa</th>
+                <th scope="col">Nazwas</th>
                 <th scope="col">Szerokość</th>
                 <th scope="col">Wysokość</th>
                 <th scope="col">Cena</th>
@@ -38,7 +42,9 @@
             <tbody>
               <tr v-for="panel in panels" :key="panel.id">
                 <th scope="row">{{ panel.id }}</th>
-                <td>{{ panel.producent }} {{ panel.name }} {{ panel.number }}</td>
+                <td>
+                  {{ panel.producent }} {{ panel.name }} {{ panel.number }}
+                </td>
                 <td>{{ panel.width }} cm</td>
                 <td>{{ panel.height }} cm</td>
                 <td>{{ panel.price }} zł</td>
