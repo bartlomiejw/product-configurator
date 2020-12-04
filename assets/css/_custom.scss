@@ -1,0 +1,94 @@
+// Variable overrides
+$orange: #DD7F58;
+
+// Bootstrap and BootstrapVue SCSS files
+  @import '~bootstrap/scss/bootstrap.scss';
+  @import '~bootstrap-vue/src/index.scss';
+
+  * {
+    font-family: 'Encode Sans', sans-serif !important;
+  }
+
+// General style overrides and custom classes
+@media (min-width: 1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1440px;
+  }
+}
+.nav-pills .nav-link {
+  border-radius: 0;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+body {
+  background-color: #fff;
+  color: #030303;
+  height: 100vh;
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #030303;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+
+  a {
+    font-family: Poppins-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+  }
+  
+  a:focus {
+    outline: none !important;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: #dfbad2;
+  }
+  .fllow-wrapper {
+    background-color: #eceeef;
+  }
+  .maxstone-wrapper {
+    background-color: #030303;
+  }
+  
+  .fllow-wrapper,
+  .maxstone-wrapper {
+    a {
+      display: block;
+      position: relative;
+      transition-duration: 0.8s;
+      transition-property: transform;
+  
+      &:hover {
+        transform: translateY(-15px); /* move the element up by 5px */
+  
+        &:before {
+          opacity: 1;
+          transform: translateY(15px);
+        }
+      }
+    }
+  }

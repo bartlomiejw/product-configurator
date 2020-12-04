@@ -1,0 +1,21 @@
+{
+  "entry": "server.js",
+  "files": {
+    "pages/home.js": "pages/home.js",
+    "pages/index.js": "pages/index.js",
+    "pages/konfigurator.js": "pages/konfigurator.js",
+    "pages/lista.js": "pages/lista.js",
+    "pages/login.js": "pages/login.js",
+    "pages/maxstone-konfigurator.js": "pages/maxstone-konfigurator.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "pages/home.js": "pages/home.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "pages/konfigurator.js": "pages/konfigurator.js.map",
+    "pages/lista.js": "pages/lista.js.map",
+    "pages/login.js": "pages/login.js.map",
+    "pages/maxstone-konfigurator.js": "pages/maxstone-konfigurator.js.map",
+    "server.js": "server.js.map"
+  }
+}

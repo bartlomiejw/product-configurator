@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "maxstones",
+  "info": {
+    "name": "Maxstone",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "producent": {
+      "type": "string",
+      "required": true,
+      "maxLength": 16,
+      "minLength": 3
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 16,
+      "minLength": 4
+    },
+    "price": {
+      "type": "decimal",
+      "unique": false,
+      "required": true
+    },
+    "width": {
+      "type": "decimal",
+      "required": true
+    },
+    "height": {
+      "type": "decimal",
+      "required": true
+    },
+    "img": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    }
+  }
+}

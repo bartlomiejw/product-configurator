@@ -1,0 +1,38 @@
+{
+  "Cookies": {
+    "description": "Auto imported from components/Cookies.vue"
+  },
+  "LazyCookies": {
+    "description": "Auto imported from components/Cookies.vue"
+  },
+  "Footer": {
+    "description": "Auto imported from components/Footer.vue"
+  },
+  "LazyFooter": {
+    "description": "Auto imported from components/Footer.vue"
+  },
+  "Header": {
+    "description": "Auto imported from components/Header.vue"
+  },
+  "LazyHeader": {
+    "description": "Auto imported from components/Header.vue"
+  },
+  "Logo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "LazyLogo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "Add": {
+    "description": "Auto imported from components/crud/Add.vue"
+  },
+  "LazyAdd": {
+    "description": "Auto imported from components/crud/Add.vue"
+  },
+  "Edit": {
+    "description": "Auto imported from components/crud/Edit.vue"
+  },
+  "LazyEdit": {
+    "description": "Auto imported from components/crud/Edit.vue"
+  }
+}

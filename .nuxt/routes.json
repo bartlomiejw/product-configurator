@@ -1,0 +1,44 @@
+[
+  {
+    "name": "home",
+    "path": "/home",
+    "component": "/home/bartek/Dokumenty/_STRONY/pc/pages/home.vue",
+    "chunkName": "pages/home",
+    "_name": "_ad0c5206"
+  },
+  {
+    "name": "konfigurator",
+    "path": "/konfigurator",
+    "component": "/home/bartek/Dokumenty/_STRONY/pc/pages/konfigurator.vue",
+    "chunkName": "pages/konfigurator",
+    "_name": "_0327a96a"
+  },
+  {
+    "name": "lista",
+    "path": "/lista",
+    "component": "/home/bartek/Dokumenty/_STRONY/pc/pages/lista.vue",
+    "chunkName": "pages/lista",
+    "_name": "_7d907356"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/home/bartek/Dokumenty/_STRONY/pc/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_b8b4218a"
+  },
+  {
+    "name": "maxstone-konfigurator",
+    "path": "/maxstone-konfigurator",
+    "component": "/home/bartek/Dokumenty/_STRONY/pc/pages/maxstone-konfigurator.vue",
+    "chunkName": "pages/maxstone-konfigurator",
+    "_name": "_8c99526a"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/bartek/Dokumenty/_STRONY/pc/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_4c0367b8"
+  }
+]
