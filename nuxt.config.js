@@ -57,7 +57,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: `${process.env.graphEndpoint}` || "https://apifllow.herokuapp.com"
+        httpEndpoint: `${process.env.graphEndpoint}` || "https://apifllow.herokuapp.com/graphql"
       }
     }
   },
