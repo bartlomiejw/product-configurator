@@ -2,7 +2,7 @@ require('dotenv').config()
 
 export default {
   env: {
-    strapiBaseUri: process.env.API_URL || "http://localhost:1337"
+    strapiBaseUri: process.env.API_URL || "https://apifllow.herokuapp.com"
   },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -57,7 +57,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: `${process.env.graphEndpoint}`
+        httpEndpoint: `${process.env.graphEndpoint}` || "https://apifllow.herokuapp.com"
       }
     }
   },
