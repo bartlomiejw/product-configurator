@@ -1013,7 +1013,7 @@ async function setContext(app, context) {
       error: context.error,
       base: '/',
       env: {
-        "strapiBaseUri": "http://localhost:1337"
+        "strapiBaseUri": "https://apifllow.herokuapp.com"
       }
     }; // Only set once
 
@@ -2718,7 +2718,7 @@ external_vue_default.a.use(external_vue_apollo_default.a);
 
   let defaultClientConfig;
   defaultClientConfig = {
-    "httpEndpoint": "http://localhost:1337/graphql"
+    "httpEndpoint": "https://apifllow.herokuapp.com/graphql"
   };
 
   const defaultValidateToken = () => true;

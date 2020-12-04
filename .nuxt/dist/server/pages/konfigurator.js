@@ -683,7 +683,7 @@ var external_graphql_tag_default = /*#__PURE__*/__webpack_require__.n(external_g
 
   data() {
     return {
-      api_url: "http://localhost:1337",
+      api_url: "https://apifllow.herokuapp.com",
       me: {},
       isHorizontal: false,
       panels: [],

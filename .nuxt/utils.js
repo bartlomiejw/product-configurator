@@ -168,7 +168,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"strapiBaseUri":"http://localhost:1337"}
+      env: {"strapiBaseUri":"https://apifllow.herokuapp.com"}
     }
     // Only set once
     if (!process.static && context.req) {
